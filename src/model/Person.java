@@ -1,5 +1,10 @@
+package model;
+
 import java.util.HashMap;
 
+/**
+ * Representation of a person's tab at a bar.
+ */
 public class Person {
 
   HashMap<Drink, Integer> drinks;
@@ -16,7 +21,7 @@ public class Person {
     this.drinks.put(type, this.drinks.getOrDefault(type, 0) + 1);
   }
 
-
+  // Computes the total cost of drinks at the end of the night
   public double computeTotal() {
     double total = 0;
     for (Drink s : this.drinks.keySet()) {
