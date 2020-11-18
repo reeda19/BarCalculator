@@ -48,4 +48,15 @@ public class Person {
   public int hashCode() {
     return Objects.hash(name);
   }
+
+  @Override
+  public String toString() {
+    int total = 0;
+    for (Drink s : this.drinks.keySet()) {
+      total += this.drinks.get(s);
+    }
+    return this.name + "has had " + total + " drinks and owes " + this.computeTotal();
+  }
+
+
 }
