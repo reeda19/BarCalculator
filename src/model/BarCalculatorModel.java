@@ -16,11 +16,23 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
 
   @Override
   public void addPerson(Person person) throws IllegalArgumentException {
-
+    if (people.contains(person)) {
+      throw new IllegalArgumentException("Person already exists");
+    }
+    people.add(person);
   }
 
   @Override
-  public void addDrinkToPerson(Drink drink, Person person) {
+  public void addDrinkToPerson(Drink drink, Person person) throws IllegalArgumentException {
+    ArrayList<Person> people = this.getPeople();
+    if (people.contains(person)) {
+      people.get(people.indexOf(person)).addDrink(drink);
+    } else {
+      throw new IllegalArgumentException("Person does not exist");
+    }
+  }
 
+  public ArrayList<Person> getPeople() {
+    return new ArrayList<Person>(people);
   }
 }

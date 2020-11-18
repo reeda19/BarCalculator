@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public interface IBarCalculatorModel<P, D> {
 
 
@@ -23,6 +25,13 @@ public interface IBarCalculatorModel<P, D> {
    */
   public void addDrinkToPerson(D drink, P person);
 
+
+  /**
+   * Returns the ArrayList of people who currently have an open tab at the bar.
+   *
+   * @return ArrayList of P objects
+   */
+  public ArrayList<P> getPeople();
 
 
 }
