@@ -7,6 +7,6 @@ public interface IBarCalculatorView {
   /**
    * Renders the view.
    */
-  public void render() throws IOException;
+  void render() throws IOException;
 
 }
