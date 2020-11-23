@@ -31,6 +31,7 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
       throw new IllegalArgumentException("Person does not exist");
     }
   }
+  
 
   public ArrayList<Person> getPeople() {
     return new ArrayList<Person>(people);
