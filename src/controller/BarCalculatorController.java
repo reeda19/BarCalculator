@@ -9,13 +9,11 @@ public class BarCalculatorController implements IBarCalculatorController {
   /*
   Command format:
 
-  Drink [drinkName] [drinkPrice] [drinkSize (ml)]
+  Drink [drinkName] [drinkPrice] [drinkSize (ml)] [beer? (boolean)]
 
   Person [personName]
 
   AddDrink [personName] [drinkName]
-
-
    */
 
 
@@ -54,7 +52,37 @@ IBarCalculatorModel<?,?> model;
   }
 
   private void parseAddDrink(Scanner scanner) {
+    if(scanner.hasNext()){
+      String drinkName = scanner.next();
+      int drinkAmount = 0;
+      if(scanner.hasNext()){
+        try{
+          drinkAmount = Integer.parseInt(scanner.next());
+          double drinkPrice = 0.0;
+          if(scanner.hasNext()){
+            try{
+              drinkPrice = Double.parseDouble(scanner.next());
+              if(scanner.hasNext()){
+                try{
+                  boolean beer = Boolean.parseBoolean(scanner.next());
+                  this.model.addDrink(drinkName,drinkAmount,drinkPrice, beer);
+                } catch (IllegalArgumentException e) {
+                  throw new IllegalArgumentException("Illegal input to beer for addDrink");
+                }
+              }
+            } catch (NumberFormatException e) {
+              throw new IllegalArgumentException("Illegal input to price for addDrink");
+            }
+          }
+        } catch (NumberFormatException e) {
+          throw new IllegalArgumentException("Illegal input to amount for addDrink");
+        }
 
+      }else{
+        throw new IllegalArgumentException("not enough input to addDrink");
+      }
+
+    }
   }
 
   private void parsePerson(Scanner scanner) {
