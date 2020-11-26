@@ -12,7 +12,7 @@ public interface IBarCalculatorController {
    * @param scanner Readable to read commands from
    * @param model model to use
    */
-  public void startCalculator(Scanner scanner, IBarCalculatorModel model);
+  public void startCalculator(Scanner scanner, IBarCalculatorModel<?,?> model);
 
 
 }

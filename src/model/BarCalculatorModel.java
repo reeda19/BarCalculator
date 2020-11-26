@@ -15,7 +15,8 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
 
 
   @Override
-  public void addPerson(Person person) throws IllegalArgumentException {
+  public void addPerson(String personName) throws IllegalArgumentException {
+    Person person = new Person(personName);
     if (people.contains(person)) {
       throw new IllegalArgumentException("Person already exists");
     }
