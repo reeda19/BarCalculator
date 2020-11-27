@@ -35,11 +35,11 @@ public class Drink {
       return false;
     }
     Drink drink = (Drink) o;
-    return Objects.equals(name, drink.name);
+    return Objects.equals(name.toLowerCase(), drink.name.toLowerCase());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(name.toLowerCase());
   }
 }

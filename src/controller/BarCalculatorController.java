@@ -1,9 +1,8 @@
 package controller;
 
 import java.util.Scanner;
-import model.Drink;
 import model.IBarCalculatorModel;
-import model.Person;
+import static java.util.Objects.requireNonNull;
 
 public class BarCalculatorController implements IBarCalculatorController {
 
@@ -17,19 +16,26 @@ public class BarCalculatorController implements IBarCalculatorController {
   AddDrink [personName] [drinkName]
    */
 
-
+Readable rd;
+Appendable ap;
 
 IBarCalculatorModel<?,?> model;
+
+public BarCalculatorController(Readable rd, Appendable ap){
+  this.rd=requireNonNull(rd);
+  this.ap=requireNonNull(ap);
+}
+
 
   /**
    * Takes in commands to add people, add drinks, and display results
    *
-   * @param scanner Readable to read commands from
+   * @param model model implementation that is being used
    */
   @Override
-  public void startCalculator(Scanner scanner, IBarCalculatorModel<?,?> model) {
+  public void startCalculator(IBarCalculatorModel<?,?> model) {
     this.model=model;
-
+    Scanner scanner = new Scanner(this.rd);
   while(scanner.hasNext()){
     String next = scanner.next().strip().toLowerCase();
     switch(next){

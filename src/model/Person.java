@@ -41,12 +41,12 @@ public class Person {
       return false;
     }
     Person person = (Person) o;
-    return name.equals(person.name);
+    return name.toLowerCase().equals(person.name.toLowerCase());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(name.toLowerCase());
   }
 
   @Override
