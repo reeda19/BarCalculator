@@ -29,12 +29,12 @@ public interface IBarCalculatorModel<P, D> {
   /**
    * Adds a drink to a specific persons tab
    *
-   * @param person the person to add a drink to their tab
-   * @param drink  the drink to be added to the person's tab
+   * @param personName name of the person to add a drink to their tab
+   * @param drinkName name of the drink to be added to the person's tab
    * @throws IllegalArgumentException thrown if the given drink or person are null or if person does
    *                                  not exist in the tab
    */
-  public void addDrinkToPerson(D drink, P person);
+  public void addDrinkToPerson(String drinkName, String personName);
 
 
   /**
@@ -43,6 +43,13 @@ public interface IBarCalculatorModel<P, D> {
    * @return ArrayList of P objects
    */
   public ArrayList<P> getPeople();
+
+  /**
+   * Returns the ArrayList of available drinks at the bar.
+   *
+   * @return ArrayList of D objects
+   */
+  public ArrayList<D> getDrinks();
 
 
 }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
 
   private final double SHOT_ML = 44.3603;
-  private ArrayList<Person> people;
-  private ArrayList<Drink> drinks;
+  private final ArrayList<Person> people;
+  private final ArrayList<Drink> drinks;
 
   public BarCalculatorModel() {
     this.people = new ArrayList<>();
@@ -33,32 +33,40 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
    * @throws IllegalArgumentException if the drink already exists in the list
    */
   @Override
-  public void addDrink(String drinkName, int amount, double price, boolean beer) throws IllegalArgumentException {
+  public void addDrink(String drinkName, int amount, double price, boolean beer)
+      throws IllegalArgumentException {
     Drink drink;
-    if(beer){
-      drink = new Drink(drinkName, price/amount);
+    if (beer) {
+      drink = new Drink(drinkName, price / amount);
+    } else {
+      drink = new Drink(drinkName, price / (amount / SHOT_ML));
     }
-    else{
-      drink = new Drink(drinkName, price/(amount/SHOT_ML));
-    }
-    if(this.drinks.contains(drink)){
+    if (this.drinks.contains(drink)) {
       throw new IllegalArgumentException("Drink already exists");
     }
     this.drinks.add(drink);
   }
 
   @Override
-  public void addDrinkToPerson(Drink drink, Person person) throws IllegalArgumentException {
+  public void addDrinkToPerson(String drinkName, String personName)
+      throws IllegalArgumentException {
+    Person person = new Person(personName);
+    Drink drink = new Drink(drinkName, 0);
     ArrayList<Person> people = this.getPeople();
-    if (people.contains(person)) {
+    if (this.getPeople().contains(person) && this.getDrinks().contains(drink)) {
       people.get(people.indexOf(person)).addDrink(drink);
     } else {
-      throw new IllegalArgumentException("Person does not exist");
+      throw new IllegalArgumentException("Person or does not exist");
     }
   }
-  
+
 
   public ArrayList<Person> getPeople() {
-    return new ArrayList<Person>(people);
+    return new ArrayList<>(this.people);
   }
+
+  public ArrayList<Drink> getDrinks() {
+    return new ArrayList<>(this.drinks);
+  }
+
 }

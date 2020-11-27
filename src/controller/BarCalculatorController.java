@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Scanner;
+import model.Drink;
 import model.IBarCalculatorModel;
 import model.Person;
 
@@ -95,5 +96,14 @@ IBarCalculatorModel<?,?> model;
   }
 
   private void parseDrink(Scanner scanner) {
+    if(scanner.hasNext()){
+      String tempPerson = scanner.next();
+      if(scanner.hasNext()){
+        String tempDrink = scanner.next();
+         this.model.addDrinkToPerson(tempDrink,tempPerson);
+         return;
+      }
+    }
+    throw new IllegalArgumentException("Not enough arguments to addDrink");
   }
 }
