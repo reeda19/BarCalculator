@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import model.IBarCalculatorModel;
 
-public class BarCalculatorView<P, D> implements IBarCalculatorView {
+public class BarCalculatorTextualView<P, D> implements IBarCalculatorView {
 
   IBarCalculatorModel<P, D> model;
   Appendable ap;
-  public BarCalculatorView(IBarCalculatorModel<P, D> model, Appendable ap) throws NullPointerException{
+  public BarCalculatorTextualView(IBarCalculatorModel<P, D> model, Appendable ap) throws NullPointerException{
     this.model=requireNonNull(model);
     this.ap=ap;
   }

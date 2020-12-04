@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Drink {
 
+
   String name;
 
   // price is per one drink. Should be calculated beforehand. 

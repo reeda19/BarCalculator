@@ -1,19 +1,25 @@
 package controller;
 
+import java.io.IOException;
 import java.util.Scanner;
 import model.IBarCalculatorModel;
+import view.BarCalculatorTextualView;
+import view.IBarCalculatorView;
+
 import static java.util.Objects.requireNonNull;
 
-public class BarCalculatorController implements IBarCalculatorController {
+public class BarCalculatorTextualController implements IBarCalculatorController {
 
   /*
   Command format:
 
-  Drink [drinkName] [drinkPrice] [drinkSize (ml)] [beer? (boolean)]
+  Drink [drinkName] [drinkPrice] [drinkSize (ml)] [beer? (boolean)] -> Creates new drink
 
-  Person [personName]
+  Person [personName] -> Opens new tab
 
-  AddDrink [personName] [drinkName]
+  AddDrink [personName] [drinkName] -> Adds existing drink to existing tab
+
+  Total -> outputs totals of all tabs
    */
 
 Readable rd;
@@ -21,7 +27,7 @@ Appendable ap;
 
 IBarCalculatorModel<?,?> model;
 
-public BarCalculatorController(Readable rd, Appendable ap){
+public BarCalculatorTextualController(Readable rd, Appendable ap){
   this.rd=requireNonNull(rd);
   this.ap=requireNonNull(ap);
 }
@@ -33,24 +39,31 @@ public BarCalculatorController(Readable rd, Appendable ap){
    * @param model model implementation that is being used
    */
   @Override
-  public void startCalculator(IBarCalculatorModel<?,?> model) {
+  public void startCalculator(IBarCalculatorModel<?,?> model) throws IOException {
     this.model=model;
     Scanner scanner = new Scanner(this.rd);
+    IBarCalculatorView view = new BarCalculatorTextualView<>(this.model, this.ap);
   while(scanner.hasNext()){
     String next = scanner.next().strip().toLowerCase();
-    switch(next){
+    switch(next.strip().toLowerCase()){
       case "drink":
-        parseDrink(scanner);
+        parseAddDrink(scanner);
         break;
       case "person":
         parsePerson(scanner);
         break;
-      case "addDrink":
-        parseAddDrink(scanner);
+      case "adddrink":
+        parseDrink(scanner);
+        break;
+      case "total":
+        this.ap.append(this.model.toString());
         break;
       default:
         throw new IllegalArgumentException("Illegal commands to scanner");
+
     }
+   // view.render();
+
   }
 
 
@@ -73,8 +86,11 @@ public BarCalculatorController(Readable rd, Appendable ap){
                 try{
                   boolean beer = Boolean.parseBoolean(scanner.next());
                   this.model.addDrink(drinkName,drinkAmount,drinkPrice, beer);
+                  this.ap.append("drink added: ").append(drinkName);
                 } catch (IllegalArgumentException e) {
                   throw new IllegalArgumentException("Illegal input to beer for addDrink");
+                } catch (IOException e) {
+                  e.printStackTrace();
                 }
               }
             } catch (NumberFormatException e) {
@@ -92,22 +108,25 @@ public BarCalculatorController(Readable rd, Appendable ap){
     }
   }
 
-  private void parsePerson(Scanner scanner) {
+  private void parsePerson(Scanner scanner) throws IOException {
     if(scanner.hasNext()){
-      this.model.addPerson(scanner.next().toString());
+      String personName = scanner.next();
+      this.model.addPerson(personName);
+      this.ap.append("person added: ").append(personName);
     }
     else{
       throw new IllegalArgumentException("Invalid input to Person");
     }
   }
 
-  private void parseDrink(Scanner scanner) {
+  private void parseDrink(Scanner scanner) throws IOException {
     if(scanner.hasNext()){
       String tempPerson = scanner.next();
       if(scanner.hasNext()){
         String tempDrink = scanner.next();
          this.model.addDrinkToPerson(tempDrink,tempPerson);
-         return;
+        this.ap.append("drink ").append(tempDrink).append(" added to ").append(tempPerson).append("'s tab");
+        return;
       }
     }
     throw new IllegalArgumentException("Not enough arguments to addDrink");

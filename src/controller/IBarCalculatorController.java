@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import model.IBarCalculatorModel;
 
 public interface IBarCalculatorController {
@@ -10,7 +11,7 @@ public interface IBarCalculatorController {
    *
    * @param model model implementation that is being used
    */
-  public void startCalculator(IBarCalculatorModel<?,?> model);
+  public void startCalculator(IBarCalculatorModel<?,?> model) throws IOException;
 
 
 }

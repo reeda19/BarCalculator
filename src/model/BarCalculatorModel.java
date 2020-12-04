@@ -69,4 +69,19 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
     return new ArrayList<>(this.drinks);
   }
 
+  @Override
+  public String toString() {
+    StringBuilder totals = new StringBuilder();
+    for(Person p : this.getPeople()){
+      totals.append(p.toString()).append("\n");
+    }
+    if(totals.length()>0) {
+      return totals.toString();
+    }
+    else{
+      return "No tabs have been opened yet";
+    }
+
+  }
+
 }

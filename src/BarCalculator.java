@@ -1,16 +1,16 @@
-import controller.BarCalculatorController;
+import controller.BarCalculatorTextualController;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import model.BarCalculatorModel;
 
 public class BarCalculator {
 
-  public static void main(String[] args){
+  public static void main(String[] args) throws IOException {
     BarCalculatorModel model = new BarCalculatorModel();
 
 
-    StringBuilder ap = new StringBuilder();
 
-    BarCalculatorController controller = new BarCalculatorController(new InputStreamReader(System.in), ap);
+    BarCalculatorTextualController controller = new BarCalculatorTextualController(new InputStreamReader(System.in), System.out);
 
 
     controller.startCalculator(model);

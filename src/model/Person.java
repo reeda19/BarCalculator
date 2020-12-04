@@ -55,7 +55,7 @@ public class Person {
     for (Drink s : this.drinks.keySet()) {
       total += this.drinks.get(s);
     }
-    return this.name + "has had " + total + " drinks and owes " + this.computeTotal();
+    return this.name + " has had " + total + " drink(s) and owes $" + this.computeTotal();
   }
 
 
