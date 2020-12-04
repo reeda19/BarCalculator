@@ -35,7 +35,7 @@ public interface IBarCalculatorModel<P, D> {
    * @throws IllegalArgumentException thrown if the given drink or person are null or if person does
    *                                  not exist in the tab
    */
-  public void addDrinkToPerson(String drinkName, String personName);
+  public void addDrinkToPerson(String personName, String drinkName);
 
 
   /**

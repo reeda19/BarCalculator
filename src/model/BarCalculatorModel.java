@@ -37,9 +37,9 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
       throws IllegalArgumentException {
     Drink drink;
     if (beer) {
-      drink = new Drink(drinkName, price / amount);
+      drink = new Drink(drinkName, price / (double)amount);
     } else {
-      drink = new Drink(drinkName, price / (amount / SHOT_ML));
+      drink = new Drink(drinkName, price / ((double)amount / SHOT_ML));
     }
     if (this.drinks.contains(drink)) {
       throw new IllegalArgumentException("Drink already exists");
@@ -48,15 +48,15 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
   }
 
   @Override
-  public void addDrinkToPerson(String drinkName, String personName)
+  public void addDrinkToPerson(String personName, String drinkName)
       throws IllegalArgumentException {
     Person person = new Person(personName);
     Drink drink = new Drink(drinkName, 0);
     ArrayList<Person> people = this.getPeople();
     if (this.getPeople().contains(person) && this.getDrinks().contains(drink)) {
-      people.get(people.indexOf(person)).addDrink(drink);
+      people.get(this.getPeople().indexOf(person)).addDrink(this.getDrinks().get(this.getDrinks().indexOf(drink)));
     } else {
-      throw new IllegalArgumentException("Person or does not exist");
+      throw new IllegalArgumentException("Person or drink does not exist");
     }
   }
 
@@ -76,7 +76,7 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
       totals.append(p.toString()).append("\n");
     }
     if(totals.length()>0) {
-      return totals.toString();
+      return totals.toString().strip();
     }
     else{
       return "No tabs have been opened yet";

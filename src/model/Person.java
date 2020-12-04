@@ -24,7 +24,7 @@ public class Person {
 
   // Computes the total cost of drinks at the end of the night
   public double computeTotal() {
-    double total = 0;
+    double total = 0.0;
     for (Drink s : this.drinks.keySet()) {
       total += this.drinks.get(s) * s.getPrice();
     }

@@ -1,12 +1,12 @@
 package controller;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.util.Scanner;
 import model.IBarCalculatorModel;
 import view.BarCalculatorTextualView;
 import view.IBarCalculatorView;
-
-import static java.util.Objects.requireNonNull;
 
 public class BarCalculatorTextualController implements IBarCalculatorController {
 
@@ -124,7 +124,7 @@ public BarCalculatorTextualController(Readable rd, Appendable ap){
       String tempPerson = scanner.next();
       if(scanner.hasNext()){
         String tempDrink = scanner.next();
-         this.model.addDrinkToPerson(tempDrink,tempPerson);
+         this.model.addDrinkToPerson(tempPerson,tempDrink);
         this.ap.append("drink ").append(tempDrink).append(" added to ").append(tempPerson).append("'s tab");
         return;
       }
