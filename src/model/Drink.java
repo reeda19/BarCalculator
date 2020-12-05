@@ -43,4 +43,9 @@ public class Drink {
   public int hashCode() {
     return Objects.hash(name.toLowerCase());
   }
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }

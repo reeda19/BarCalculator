@@ -16,6 +16,9 @@ public class Person {
     this.drinks = new HashMap<>();
   }
 
+  public String getName(){
+    return this.name;
+  }
 
   // adds one to drink of given type
   public void addDrink(Drink type) {
