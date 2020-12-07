@@ -172,6 +172,39 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
   }
 
   public void addDrinkScreen() {
+    JFrame drinkFrame = new JFrame("Add Drink");
+    JPanel drinkGlobe = new JPanel();
+    JPanel drinkPanel = new JPanel();
+
+    drinkGlobe.setLayout(new BoxLayout(drinkGlobe, BoxLayout.Y_AXIS));
+    drinkPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+    drinkFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    drinkFrame.setExtendedState(JFrame.EXIT_ON_CLOSE);
+    JLabel drinkNameLabel = new JLabel("Drink Name:");
+    JTextField drinkNameField = new JTextField(15);
+    JLabel drinkAmountLabel = new JLabel("Drink Amount (ml):");
+    JTextField drinkAmountField = new JTextField(5);
+    JLabel drinkPriceLabel = new JLabel("Drink Price:");
+    JTextField drinkPriceField = new JTextField(5);
+    JButton addDrinkBtn = new JButton("Add Drink");
+    addDrinkBtn.addActionListener(e -> addDrinkBtnClick(){
+
+
+    });
+
+
+    drinkPanel.add(drinkNameLabel);
+    drinkPanel.add(drinkNameField);
+    drinkPanel.add(drinkAmountLabel);
+    drinkPanel.add(drinkAmountField);
+    drinkPanel.add(drinkPriceLabel);
+    drinkPanel.add(drinkPriceField);
+    drinkPanel.add(addDrinkBtn);
+    drinkGlobe.add(drinkPanel);
+    drinkFrame.add(drinkGlobe);
+    drinkFrame.setVisible(true);
 
   }
+
+
 }
