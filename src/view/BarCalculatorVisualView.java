@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JSpinner.ListEditor;
+import javax.swing.JTextArea;
 import model.BarCalculatorModel;
 import model.Drink;
 import model.IBarCalculatorModel;
@@ -27,6 +28,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
   JPanel globe;
   JPanel top;
   JPanel bottom;
+  JPanel middle;
 
   public BarCalculatorVisualView(IBarCalculatorModel<Person, Drink> model){
     this.model = model;
@@ -56,9 +58,11 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     frame = new JFrame("Bar Calculator");
     globe = new JPanel();
     top = new JPanel();
+    middle = new JPanel();
     bottom = new JPanel();
     globe.setLayout(new BoxLayout(globe, BoxLayout.Y_AXIS));
     top.setAlignmentY(Component.CENTER_ALIGNMENT);
+    middle.setAlignmentY(Component.CENTER_ALIGNMENT);
     bottom.setAlignmentY(Component.CENTER_ALIGNMENT);
     frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     frame.setExtendedState(JFrame.EXIT_ON_CLOSE);
@@ -94,12 +98,17 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     JButton addPerson = new JButton("Add a person");
     addPerson.addActionListener(e -> addPersonScreen());
     JButton addDrink = new JButton("Add a drink");
+
+    JTextArea tab = new JTextArea(this.model.toString());
+    middle.add(tab);
+
     addDrink.addActionListener(e -> addDrinkScreen());
     bottom.add(promptNew);
     bottom.add(addPerson);
     bottom.add(addDrink);
 
     globe.add(top);
+    globe.add(middle);
     globe.add(bottom);
     frame.add(globe);
     frame.setVisible(true);
