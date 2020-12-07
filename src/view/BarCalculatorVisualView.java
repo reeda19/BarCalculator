@@ -4,12 +4,15 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +33,9 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
   JPanel bottom;
   JPanel middle;
   List<Person> peopleList;
+  List<Drink> drinkList;
   JTextArea tab;
+
   public BarCalculatorVisualView(IBarCalculatorModel<Person, Drink> model) {
     this.model = model;
     setFrame();
@@ -93,7 +98,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
       people.addItem(p.getName());
     }
     JLabel promptDrink = new JLabel("What are you having?:");
-    List<Drink> drinkList = model.getDrinks();
+    drinkList = model.getDrinks();
     JComboBox<String> drinks = new JComboBox<>();
     for (Drink d : drinkList) {
       drinks.addItem(d.toString());
@@ -187,11 +192,60 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     JLabel drinkPriceLabel = new JLabel("Drink Price:");
     JTextField drinkPriceField = new JTextField(5);
     JButton addDrinkBtn = new JButton("Add Drink");
-    addDrinkBtn.addActionListener(e -> addDrinkBtnClick(){
+    JCheckBox beerBox = new JCheckBox("Is this beer?");
+    drinkAmountField.addKeyListener(
+        new KeyAdapter() {
+          /**
+           * Allows characters 0 through 9 as well as '.' to be typed. It consumes any other
+           * characters, essentially limiting the characters a user can enter into the text
+           * box.
+           *
+           * @param e the given key event that occurs
+           */
+          public void keyTyped(KeyEvent e) {
+            char c = e.getKeyChar();
+            if (!((c >= '0') && (c <= '9') ||
+                (c == KeyEvent.VK_BACK_SPACE) ||
+                (c == KeyEvent.VK_DELETE)|| c == KeyEvent.VK_ENTER)) {
+              e.consume();
+            }
+          }
+        }
+    );
+    drinkPriceField.addKeyListener(
+        new KeyAdapter() {
+          /**
+           * Allows characters 0 through 9 as well as '.' to be typed. It consumes any other
+           * characters, essentially limiting the characters a user can enter into the text
+           * box.
+           *
+           * @param e the given key event that occurs
+           */
+          public void keyTyped(KeyEvent e) {
+            char c = e.getKeyChar();
+            if (!((c >= '0') && (c <= '9') ||
+                (c == KeyEvent.VK_BACK_SPACE) ||
+                (c == KeyEvent.VK_DELETE) || c == '.' || c == KeyEvent.VK_ENTER)) {
+              e.consume();
+            }
+          }
+        }
+    );
+    addDrinkBtn.addActionListener(e -> {
+      try {
+        model.addDrink(drinkNameField.getText(), Integer.parseInt(drinkAmountField.getText()),
+            Double.parseDouble(drinkPriceField.getText()), beerBox.isSelected());
 
+        drinkFrame.setVisible(false);
 
+        // this does not work
+        drinkList = model.getDrinks();
+        //reload frame
+        frame.repaint();
+      } catch (IllegalArgumentException i) {
+        throwError("Drink already exists");
+      }
     });
-
 
     drinkPanel.add(drinkNameLabel);
     drinkPanel.add(drinkNameField);
@@ -199,6 +253,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     drinkPanel.add(drinkAmountField);
     drinkPanel.add(drinkPriceLabel);
     drinkPanel.add(drinkPriceField);
+    drinkPanel.add(beerBox);
     drinkPanel.add(addDrinkBtn);
     drinkGlobe.add(drinkPanel);
     drinkFrame.add(drinkGlobe);
