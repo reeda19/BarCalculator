@@ -1,11 +1,12 @@
 package view;
 
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 import java.awt.Component;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,9 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JSpinner.ListEditor;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import model.BarCalculatorModel;
 import model.Drink;
 import model.IBarCalculatorModel;
@@ -29,8 +29,9 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
   JPanel top;
   JPanel bottom;
   JPanel middle;
-
-  public BarCalculatorVisualView(IBarCalculatorModel<Person, Drink> model){
+  List<Person> peopleList;
+  JTextArea tab;
+  public BarCalculatorVisualView(IBarCalculatorModel<Person, Drink> model) {
     this.model = model;
     setFrame();
     try {
@@ -40,7 +41,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     }
   }
 
-  public static void main(String[] args){
+  public static void main(String[] args) {
     BarCalculatorModel mod = new BarCalculatorModel();
     mod.addPerson("Alex");
     mod.addPerson("Shreya");
@@ -54,7 +55,17 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     new BarCalculatorVisualView(mod);
   }
 
-  private void setFrame(){
+  // creates a popup error with given message displayed
+  private static void throwError(String errorMessage) {
+    JFrame frame = new JFrame("Error");
+    showMessageDialog(frame,
+        errorMessage,
+        "Error",
+        ERROR_MESSAGE);
+
+  }
+
+  private void setFrame() {
     frame = new JFrame("Bar Calculator");
     globe = new JPanel();
     top = new JPanel();
@@ -76,15 +87,15 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     globe.add(title);
 
     JLabel promptPerson = new JLabel("Who are you?:");
-    List<Person> peopleList = model.getPeople();
+    peopleList = model.getPeople();
     JComboBox<String> people = new JComboBox<>();
-    for(Person p: peopleList){
+    for (Person p : peopleList) {
       people.addItem(p.getName());
     }
     JLabel promptDrink = new JLabel("What are you having?:");
     List<Drink> drinkList = model.getDrinks();
     JComboBox<String> drinks = new JComboBox<>();
-    for(Drink d: drinkList){
+    for (Drink d : drinkList) {
       drinks.addItem(d.toString());
     }
     JButton order = new JButton("Order");
@@ -99,7 +110,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     addPerson.addActionListener(e -> addPersonScreen());
     JButton addDrink = new JButton("Add a drink");
 
-    JTextArea tab = new JTextArea(this.model.toString());
+    tab = new JTextArea(this.model.toString());
     middle.add(tab);
 
     addDrink.addActionListener(e -> addDrinkScreen());
@@ -114,11 +125,53 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
     frame.setVisible(true);
   }
 
-  public void addPersonScreen(){
+  public void addPersonScreen() {
+    JFrame personFrame = new JFrame("Add Person");
+    JPanel personGlobe = new JPanel();
+    JPanel personPanel = new JPanel();
 
+    personGlobe.setLayout(new BoxLayout(personGlobe, BoxLayout.Y_AXIS));
+    personPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+    personFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    personFrame.setExtendedState(JFrame.EXIT_ON_CLOSE);
+    JLabel addPersonLabel = new JLabel("What is your name?");
+    JTextField addPersonField = new JTextField(15);
+    personPanel.add(addPersonLabel);
+    personPanel.add(addPersonField);
+    personGlobe.add(personPanel);
+    personFrame.add(personGlobe);
+    personFrame.setVisible(true);
+
+    addPersonField.addKeyListener(new KeyAdapter() {
+      /**
+       * When the 'Enter' key is pressed, the text in the addPersonField text box is inputted
+       * into the addPerson() method, and the text box is cleared.
+       *
+       * @param e the given key event that occurs
+       */
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+          try {
+            model.addPerson(addPersonField.getText());
+            addPersonField.setText("");
+            personFrame.setVisible(false);
+
+            // this does not work
+            peopleList = model.getPeople();
+            tab = new JTextArea(model.toString());
+            //reload frame
+            frame.repaint();
+
+
+          } catch (IllegalArgumentException illegalArgumentException) {
+            throwError("Person already exists");
+          }
+        }
+      }
+    });
   }
 
-  public void addDrinkScreen(){
+  public void addDrinkScreen() {
 
   }
 }
