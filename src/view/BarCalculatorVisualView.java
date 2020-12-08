@@ -1,6 +1,7 @@
 package view;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Component;
@@ -109,6 +110,11 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
           String.valueOf(drinks.getSelectedItem()));
       tab.setText(this.model.toString());
 
+      JFrame frame = new JFrame("Success");
+      showMessageDialog(frame,
+          "Drink Ordered!",
+          "Success",
+          PLAIN_MESSAGE);
 
     });
     top.add(promptPerson);
