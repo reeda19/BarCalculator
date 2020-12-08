@@ -4,8 +4,6 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -35,6 +33,8 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
   List<Person> peopleList;
   List<Drink> drinkList;
   JTextArea tab;
+  JComboBox<String> people;
+  JComboBox<String> drinks;
 
   public BarCalculatorVisualView(IBarCalculatorModel<Person, Drink> model) {
     this.model = model;
@@ -93,17 +93,24 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
 
     JLabel promptPerson = new JLabel("Who are you?:");
     peopleList = model.getPeople();
-    JComboBox<String> people = new JComboBox<>();
+    people = new JComboBox<>();
     for (Person p : peopleList) {
       people.addItem(p.getName());
     }
     JLabel promptDrink = new JLabel("What are you having?:");
     drinkList = model.getDrinks();
-    JComboBox<String> drinks = new JComboBox<>();
+    drinks = new JComboBox<>();
     for (Drink d : drinkList) {
       drinks.addItem(d.toString());
     }
     JButton order = new JButton("Order");
+    order.addActionListener(e -> {
+      this.model.addDrinkToPerson(String.valueOf(people.getSelectedItem()),
+          String.valueOf(drinks.getSelectedItem()));
+      tab.setText(this.model.toString());
+
+
+    });
     top.add(promptPerson);
     top.add(people);
     top.add(promptDrink);
@@ -161,11 +168,9 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
             addPersonField.setText("");
             personFrame.setVisible(false);
 
-            // this does not work
             peopleList = model.getPeople();
-            tab = new JTextArea(model.toString());
-            //reload frame
-            frame.repaint();
+            tab.setText(model.toString());
+            people.addItem(peopleList.get(peopleList.size() - 1).getName());
 
 
           } catch (IllegalArgumentException illegalArgumentException) {
@@ -206,7 +211,7 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
             char c = e.getKeyChar();
             if (!((c >= '0') && (c <= '9') ||
                 (c == KeyEvent.VK_BACK_SPACE) ||
-                (c == KeyEvent.VK_DELETE)|| c == KeyEvent.VK_ENTER)) {
+                (c == KeyEvent.VK_DELETE) || c == KeyEvent.VK_ENTER)) {
               e.consume();
             }
           }
@@ -238,10 +243,8 @@ public class BarCalculatorVisualView implements IBarCalculatorView {
 
         drinkFrame.setVisible(false);
 
-        // this does not work
         drinkList = model.getDrinks();
-        //reload frame
-        frame.repaint();
+        drinks.addItem(this.drinkList.get(this.drinkList.size() - 1).toString());
       } catch (IllegalArgumentException i) {
         throwError("Drink already exists");
       }

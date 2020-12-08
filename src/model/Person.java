@@ -1,5 +1,6 @@
 package model;
 
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -58,7 +59,7 @@ public class Person {
     for (Drink s : this.drinks.keySet()) {
       total += this.drinks.get(s);
     }
-    return this.name + " has had " + total + " drink(s) and owes $" + this.computeTotal();
+    return this.name + " has had " + total + " drink(s) and owes $" + String.format("%.2f%n",this.computeTotal());
   }
 
 
