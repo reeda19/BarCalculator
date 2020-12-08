@@ -17,6 +17,7 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
 
   @Override
   public void addPerson(String personName) throws IllegalArgumentException {
+    checkValidString(personName);
     Person person = new Person(personName);
     if (people.contains(person)) {
       throw new IllegalArgumentException("Person already exists");
@@ -36,6 +37,7 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
   public void addDrink(String drinkName, int amount, double price, boolean beer)
       throws IllegalArgumentException {
     Drink drink;
+    checkValidString(drinkName);
     if (beer) {
       drink = new Drink(drinkName, price / (double) amount);
     } else {
@@ -50,6 +52,8 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
   @Override
   public void addDrinkToPerson(String personName, String drinkName)
       throws IllegalArgumentException {
+    checkValidString(personName);
+    checkValidString(drinkName);
     Person person = new Person(personName);
     Drink drink = new Drink(drinkName, 0);
     ArrayList<Person> people = this.getPeople();
@@ -82,6 +86,12 @@ public class BarCalculatorModel implements IBarCalculatorModel<Person, Drink> {
       return "No tabs have been opened yet";
     }
 
+  }
+
+  private void checkValidString(String str){
+    if(str==null || str.equals("")){
+      throw new IllegalArgumentException("String cannot be null or empty");
+    }
   }
 
 }
