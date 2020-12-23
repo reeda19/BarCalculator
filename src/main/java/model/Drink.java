@@ -2,16 +2,21 @@ package model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.Objects;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name = "drink")
 public class Drink {
 
 
-  String name;
 
-  // price is per one drink. Should be calculated beforehand. 
-  // For example, a drink of vodka is equal to one shot, not one handle, so it would be about 0.50, not 30
-  double price;
 
 
   public Drink(String name, double price) throws IllegalArgumentException {
@@ -22,9 +27,10 @@ public class Drink {
     this.price = price;
   }
 
-  public double getPrice() {
-    return this.price;
+  public Drink() {
+    
   }
+
 
 
   @Override
@@ -48,4 +54,60 @@ public class Drink {
   public String toString() {
     return name;
   }
+
+
+
+
+
+  
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int drinkId;
+
+    @Column(name = "name")
+    private String name;
+
+
+  // price is per one drink. Should be calculated beforehand. 
+  // For example, a drink of vodka is equal to one shot, not one handle, so it would be about 0.50, not 30
+  @Column(name = "price")
+    private double price;
+
+
+    @OneToMany(mappedBy = "did")
+    private List<BoughtDrink> boughtDrinks;
+    
+    public int getDrinkId() {
+      return this.drinkId;
+    }
+
+    public void setDrinkId(int drinkId) {
+      this.drinkId = drinkId;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public double getPrice() {
+      return this.price;
+    }
+
+    public void setPrice(double price) {
+      this.price = price;
+    }
+
+    public List<BoughtDrink> getBoughtDrinks() {
+      return this.boughtDrinks;
+    }
+
+    public void setBoughtDrinks(
+        List<BoughtDrink> boughtDrinks) {
+      this.boughtDrinks = boughtDrinks;
+    }
 }
