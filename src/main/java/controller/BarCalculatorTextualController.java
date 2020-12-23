@@ -5,8 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.Scanner;
 import model.IBarCalculatorModel;
-import view.BarCalculatorTextualView;
-import view.IBarCalculatorView;
+
 
 public class BarCalculatorTextualController implements IBarCalculatorController {
 
@@ -42,7 +41,6 @@ public BarCalculatorTextualController(Readable rd, Appendable ap){
   public void startCalculator(IBarCalculatorModel<?,?> model) throws IOException {
     this.model=model;
     Scanner scanner = new Scanner(this.rd);
-    IBarCalculatorView view = new BarCalculatorTextualView<>(this.model, this.ap);
   while(scanner.hasNext()){
     String next = scanner.next().strip().toLowerCase();
     switch(next.strip().toLowerCase()){
