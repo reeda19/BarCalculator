@@ -1,5 +1,9 @@
 class Index extends React.Component {
-  userStr;
+
+
+
+  // can be used for logging in for the future?
+/*  userStr;
 
   constructor(props) {
     super(props);
@@ -11,17 +15,17 @@ class Index extends React.Component {
     this.setState({value: event.target.value});
     localStorage.setItem("user", event.target.value);
     this.userStr = this.state.value;
-  };
+  };*/
 
   render() {
     return (<div className="container">
       <h1>Bar Calculator</h1>
       <ul className="list-group">
         <li className="list-group-item">
-          <a href="person-list/person-list.html">People</a>
+          <a href="person-list/person-list.html">Open Tabs</a>
         </li>
         <li className="list-group-item">
-          <a href="drink-list/drink-list.html">Drinks</a>
+          <a href="drink-list/drink-list.html">Available Drinks</a>
         </li>
       </ul>
     </div>);
