@@ -11,13 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "drink")
 public class Drink {
 
-
-
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int drinkId;
+  @Column(name = "name")
+  private String name;
+  // price is per one drink. Should be calculated beforehand.
+  // For example, a drink of vodka is equal to one shot, not one handle, so it would be about 0.50, not 30
+  @Column(name = "price")
+  private double price;
+  @OneToMany(mappedBy = "did")
+  private List<BoughtDrink> boughtDrinks;
 
   public Drink(String name, double price) throws IllegalArgumentException {
     this.name = requireNonNull(name);
@@ -27,11 +36,10 @@ public class Drink {
     this.price = price;
   }
 
+
   public Drink() {
-    
+
   }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -55,59 +63,36 @@ public class Drink {
     return name;
   }
 
+  public int getDrinkId() {
+    return this.drinkId;
+  }
 
+  public void setDrinkId(int drinkId) {
+    this.drinkId = drinkId;
+  }
 
+  public String getName() {
+    return name;
+  }
 
+  public void setName(String name) {
+    this.name = name;
+  }
 
-  
+  public double getPrice() {
+    return this.price;
+  }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int drinkId;
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    @Column(name = "name")
-    private String name;
+  public List<BoughtDrink> getBoughtDrinks() {
+    return this.boughtDrinks;
+  }
 
-
-  // price is per one drink. Should be calculated beforehand. 
-  // For example, a drink of vodka is equal to one shot, not one handle, so it would be about 0.50, not 30
-  @Column(name = "price")
-    private double price;
-
-
-    @OneToMany(mappedBy = "did")
-    private List<BoughtDrink> boughtDrinks;
-    
-    public int getDrinkId() {
-      return this.drinkId;
-    }
-
-    public void setDrinkId(int drinkId) {
-      this.drinkId = drinkId;
-    }
-
-    public String getName() {
-      return name;
-    }
-
-    public void setName(String name) {
-      this.name = name;
-    }
-
-    public double getPrice() {
-      return this.price;
-    }
-
-    public void setPrice(double price) {
-      this.price = price;
-    }
-
-    public List<BoughtDrink> getBoughtDrinks() {
-      return this.boughtDrinks;
-    }
-
-    public void setBoughtDrinks(
-        List<BoughtDrink> boughtDrinks) {
-      this.boughtDrinks = boughtDrinks;
-    }
+  public void setBoughtDrinks(
+      List<BoughtDrink> boughtDrinks) {
+    this.boughtDrinks = boughtDrinks;
+  }
 }

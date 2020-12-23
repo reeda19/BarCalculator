@@ -9,13 +9,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * Used to map Many to Many relationship between Person and Drink. One person can have many drinks,
+ * while one drink can be bought by many people.
+ */
 @Entity
 @Table(name = "persons_drinks")
 @IdClass(BoughtDrinkId.class)
 public class BoughtDrink {
 
-  
-  
+
   // Drink ID
   @Id
   @Column(name = "did")
@@ -25,6 +28,9 @@ public class BoughtDrink {
   @Id
   @Column(name = "pid")
   private int pid;
+
+  @Column(name = "amountBought")
+  private int amountBought;
 
 
   @ManyToOne
@@ -68,5 +74,13 @@ public class BoughtDrink {
 
   public void setPerson(Person person) {
     this.person = person;
+  }
+
+  public int getAmountBought() {
+    return amountBought;
+  }
+
+  public void increaseAmount() {
+    this.amountBought = amountBought+1;
   }
 }
