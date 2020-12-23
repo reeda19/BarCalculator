@@ -50,7 +50,6 @@ class DrinkList extends React.Component {
                     <td>{drink.name}</td>
                     <td>{drink.price}</td>
                     <td>{drink.amount}</td>
-                    <td>drink.drinkList</td>
                     <td>
                       <button
                           id="delete" className="btn btn-danger float-right"

@@ -1,26 +1,26 @@
-const FIND_ALL_BOOKS  = "http://localhost:8080/findAllPersons"
-const FIND_BOOK_BY_ID = "http://localhost:8080/findPersonById"
-const CREATE_BOOK_URL = "http://localhost:8080/addPerson"
-const DELETE_BOOK_URL = "http://localhost:8080/deletePerson"
-const UPDATE_BOOK     = "http://localhost:8080/updatePerson"
+const FIND_ALL_PERSONS  = "http://localhost:8080/findAllPersons"
+const FIND_PERSON_BY_ID = "http://localhost:8080/findPersonById"
+const CREATE_PERSON_URL = "http://localhost:8080/addPerson"
+const DELETE_PERSON_URL = "http://localhost:8080/deletePerson"
+const UPDATE_PERSON     = "http://localhost:8080/updatePerson"
 
 const findAllPersons = () =>
-    fetch(`${FIND_ALL_BOOKS}`)
+    fetch(`${FIND_ALL_PERSONS}`)
     .then(response => response.json())
 
 const findPersonById = (personId) =>
-    fetch(`${FIND_BOOK_BY_ID}/${personId}`)
+    fetch(`${FIND_PERSON_BY_ID}/${personId}`)
     .then(response => response.json())
 
 const createPerson = (person) =>
-    fetch(`${CREATE_BOOK_URL}`)
+    fetch(`${CREATE_PERSON_URL}`)
     .then(response => response.json())
 
 const deletePerson = (personId) =>
-    fetch(`${DELETE_BOOK_URL}/${personId}`)
+    fetch(`${DELETE_PERSON_URL}/${personId}`)
 
 const updatePersonName = (person) =>
-    fetch(`${UPDATE_BOOK}/${person.personId}/name/${person.title}`)
+    fetch(`${UPDATE_PERSON}/${person.personId}/name/${person.name}`)
     .then(response => response.json())
 
 
