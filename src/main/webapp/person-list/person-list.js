@@ -25,19 +25,19 @@ class PersonList extends React.Component {
           <button
               className="btn btn-success float-right"
               onClick={() => this.createPerson()}>
-            Create
+            Open New Tab
           </button>
           <a className="btn btn-danger float-right"
              href="../../index.html">
             Home
           </a>
-          <h1>Person List</h1>
+          <h1>Open Tabs</h1>
           <table className="table">
             <thead>
             <tr>
               <th>Person ID</th>
-              <th>Title</th>
-              <th>Author</th>
+              <th>Name</th>
+              <th>Total $ Owed</th>
               <th>&nbsp;</th>
             </tr>
             </thead>
