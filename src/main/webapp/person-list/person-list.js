@@ -1,6 +1,6 @@
 class PersonList extends React.Component {
   state = {
-    persons: [],
+    persons: []
   }
 
   findAllPersons = () =>
