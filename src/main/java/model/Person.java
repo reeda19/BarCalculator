@@ -75,7 +75,8 @@ public class Person {
   }
 
   // adds one to drink of given type
-  public void addDrink(BoughtDrink type) {
+  public void addDrink(Drink drink) {
+    BoughtDrink type = new BoughtDrink(this.personId, drink.getDrinkId());
     if (this.boughtDrinks.contains(type)) {
       this.boughtDrinks.get(boughtDrinks.indexOf(type)).increaseAmount();
     } else {

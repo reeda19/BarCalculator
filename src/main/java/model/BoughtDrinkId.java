@@ -13,7 +13,8 @@ public class BoughtDrinkId implements Serializable {
     this.pid = pid;
   }
 
-  public BoughtDrinkId() {}
+  public BoughtDrinkId() {
+  }
 
 
 }

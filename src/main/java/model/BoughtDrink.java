@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +18,28 @@ import javax.persistence.Table;
 @Table(name = "persons_drinks")
 @IdClass(BoughtDrinkId.class)
 public class BoughtDrink {
+  BoughtDrink(int pid, int did){
+    this.pid=pid;
+    this.did=did;
+  }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BoughtDrink that = (BoughtDrink) o;
+    return did == that.did &&
+        pid == that.pid;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(did, pid);
+  }
 
   // Drink ID
   @Id
