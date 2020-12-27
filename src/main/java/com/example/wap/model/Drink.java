@@ -1,4 +1,4 @@
-package model;
+package com.example.wap.model;
 
 import static java.util.Objects.requireNonNull;
 

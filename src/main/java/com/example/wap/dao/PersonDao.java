@@ -1,16 +1,15 @@
-package dao;
+package com.example.wap.dao;
 
-import model.BoughtDrink;
-import model.Person;
+import com.example.wap.model.BoughtDrink;
+import com.example.wap.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import repository.BoughtDrinkRepository;
-import repository.PersonRepository;
+import com.example.wap.repository.BoughtDrinkRepository;
+import com.example.wap.repository.PersonRepository;
 
 @RestController
-
 public class PersonDao {
   
     @Autowired

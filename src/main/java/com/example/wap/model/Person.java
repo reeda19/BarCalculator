@@ -1,4 +1,4 @@
-package model;
+package com.example.wap.model;
 
 
 import java.util.ArrayList;

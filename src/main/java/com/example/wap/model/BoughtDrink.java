@@ -1,4 +1,4 @@
-package model;
+package com.example.wap.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;

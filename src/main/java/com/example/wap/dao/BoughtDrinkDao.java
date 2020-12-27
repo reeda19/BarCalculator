@@ -1,4 +1,4 @@
-package dao;
+package com.example.wap.dao;
 
 public class BoughtDrinkDao {
 

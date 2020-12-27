@@ -1,10 +1,10 @@
-package controller;
+package com.example.wap.controller;
 
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.util.Scanner;
-import model.IBarCalculatorModel;
+import com.example.wap.model.IBarCalculatorModel;
 
 
 public class BarCalculatorTextualController implements IBarCalculatorController {
@@ -35,7 +35,7 @@ public BarCalculatorTextualController(Readable rd, Appendable ap){
   /**
    * Takes in commands to add people, add drinks, and display results
    *
-   * @param model model implementation that is being used
+   * @param model com.example.wap.model implementation that is being used
    */
   @Override
   public void startCalculator(IBarCalculatorModel<?,?> model) throws IOException {
