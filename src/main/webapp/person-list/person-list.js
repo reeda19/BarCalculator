@@ -48,7 +48,6 @@ class PersonList extends React.Component {
                     <td>{person.personId}</td>
                     <td>{person.name}</td>
                     <td>{person.total}</td>
-                    <td>person.drinkList</td>
                     <td>
                       <button
                           id="delete" className="btn btn-danger float-right"

@@ -18,6 +18,7 @@ public class Drink {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="drink_id")
   private int drinkId;
   @Column(name = "name")
   private String name;

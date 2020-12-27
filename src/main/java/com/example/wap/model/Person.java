@@ -22,6 +22,7 @@ public class Person {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="person_id")
   private int personId;
 
   @Column(name = "name")
@@ -44,12 +45,12 @@ public class Person {
     this.boughtDrinks = new ArrayList<>();
   }
 
-  public int getLibrarianId() {
+  public int getPersonId() {
     return personId;
   }
 
-  public void setLibrarianId(int librarianId) {
-    this.personId = librarianId;
+  public void setPersonId(int personId) {
+    this.personId = personId;
   }
 
   public String getName() {

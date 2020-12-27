@@ -1,7 +1,7 @@
 const FIND_ALL_DRINKS  = "http://localhost:8080/findAllDrinks"
 const FIND_DRINK_BY_ID = "http://localhost:8080/findDrinkById"
 const CREATE_DRINK_URL = "http://localhost:8080/addDrink"
-const DELETE_DRINK_URL = "http://localhost:8080/deleteDrink"
+const DELETE_DRINK_URL = "http://localhost:8080/removeDrink"
 const UPDATE_DRINK     = "http://localhost:8080/updateDrink"
 
 const findAllDrinks = () =>
