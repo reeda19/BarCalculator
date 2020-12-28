@@ -1,8 +1,8 @@
 const FIND_ALL_PERSONS  = "http://localhost:8080/findAllPersons"
-const FIND_PERSON_BY_ID = "http://localhost:8080/findPersonById"
+const FIND_PERSON_BY_ID = "http://localhost:8080/findPerson"
 const CREATE_PERSON_URL = "http://localhost:8080/addPerson"
 const DELETE_PERSON_URL = "http://localhost:8080/removePerson"
-const UPDATE_PERSON     = "http://localhost:8080/updatePerson"
+const UPDATE_PERSON    = "http://localhost:8080/updatePerson"
 
 const findAllPersons = () =>
     fetch(`${FIND_ALL_PERSONS}`)

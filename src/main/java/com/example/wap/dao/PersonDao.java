@@ -45,7 +45,7 @@ public class PersonDao {
       return personRepository.save(l);
     }
 
-    @GetMapping("/setPerson/{id}/Name/{name}")
+    @GetMapping("/updatePerson/{id}/name/{name}")
     public Person setPersonName(@PathVariable(name = "id") int id,
         @PathVariable(name = "name") String name) {
       Person person = personRepository.findById(id).get();
