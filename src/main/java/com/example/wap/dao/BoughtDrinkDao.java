@@ -21,20 +21,20 @@ public class BoughtDrinkDao {
   @Autowired
   BoughtDrinkRepository boughtDrinkRepository;
 
-  @GetMapping("/addPerson/{sched}/ToDrink/{id}")
-  public BoughtDrink setBoughtDrink(@PathVariable(name = "id") int id, @PathVariable(name = "sched") int sched) {
+  @GetMapping("/addDrink/{did}/ToPerson/{id}")
+  public BoughtDrink setBoughtDrink(@PathVariable(name = "id") int id, @PathVariable(name = "did") int did) {
     BoughtDrink boughtDrink = new BoughtDrink();
-    boughtDrink.setDrinkId(id);
-    boughtDrink.setPersonId(sched);
-    boughtDrink.setDrink(drinkRepository.findById(id).get());
-    boughtDrink.setPerson(personRepository.findById(sched).get());
+    boughtDrink.setDrinkId(did);
+    boughtDrink.setPersonId(id);
+    boughtDrink.setDrink(drinkRepository.findById(did).get());
+    boughtDrink.setPerson(personRepository.findById(id).get());
     return boughtDrinkRepository.save(boughtDrink);
   }
 
 
-  @GetMapping("/removePerson/{sched}/FromDrink/{id}")
-  public void removeBoughtDrink(@PathVariable(name = "sched") int sched, @PathVariable(name = "id") int id) {
-    BoughtDrinkId boughtDrinkId = new BoughtDrinkId(id, sched);
+  @GetMapping("/removeDrink/{did}/FromPerson/{id}")
+  public void removeBoughtDrink(@PathVariable(name = "did") int did, @PathVariable(name = "id") int id) {
+    BoughtDrinkId boughtDrinkId = new BoughtDrinkId(id, did);
     boughtDrinkRepository.deleteById(boughtDrinkId);
   }
 

@@ -23,6 +23,10 @@ public class BoughtDrink {
     this.did=did;
   }
 
+  public BoughtDrink() {
+
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
