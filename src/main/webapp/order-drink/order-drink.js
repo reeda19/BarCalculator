@@ -5,27 +5,16 @@ class OrderDrink extends React.Component {
     person: {}
   }
 
-  personId;
-
   findAllDrinks = () =>
       findAllDrinks()
       .then((drinks) => this.setState({drinks}))
-
-  findPersonById = (id) =>{
-    findPersonById(id)
-    .then(person => this.setState({person}))}
 
   findAllPersons = () =>
       findAllPersons()
       .then((persons) => this.setState({persons}))
 
-  createDrink = () =>
-      createDrink()
-      .then(() => this.findAllDrinks())
-
-  deleteDrink = (drinkId) =>
-      deleteDrink(drinkId)
-      .then(() => this.findAllDrinks())
+  addDrinkToPerson = (did) =>
+      addDrinkToPerson(this.state.person.personId, did)
 
   componentDidMount = () => {
     this.findAllDrinks();
@@ -39,8 +28,6 @@ class OrderDrink extends React.Component {
 
   render() {
     return (
-
-
 
         <div className="container-fluid">
             <label htmlFor="user">Choose a tab: </label>
