@@ -1,7 +1,8 @@
 class OrderDrink extends React.Component {
   state = {
     drinks: [],
-    persons: []
+    persons: [],
+    person: {}
   }
 
   personId;
@@ -9,6 +10,14 @@ class OrderDrink extends React.Component {
   findAllDrinks = () =>
       findAllDrinks()
       .then((drinks) => this.setState({drinks}))
+
+  findPersonById = (id) =>{
+    findPersonById(id)
+    .then(person => this.setState({person}))}
+
+  findAllPersons = () =>
+      findAllPersons()
+      .then((persons) => this.setState({persons}))
 
   createDrink = () =>
       createDrink()
@@ -19,12 +28,12 @@ class OrderDrink extends React.Component {
       .then(() => this.findAllDrinks())
 
   componentDidMount = () => {
-    this.findAllDrinks().then(
-    this.findAllPersons())
+    this.findAllDrinks();
+    this.findAllPersons()
   }
 
   handleChange = event => {
-    personId
+    this.setState({person: event.target.value});
   }
 
 
@@ -34,16 +43,11 @@ class OrderDrink extends React.Component {
 
 
         <div className="container-fluid">
-            <label htmlFor="user">Choose a tab:</label>
-            <select value={this.personId} onChange={this.handleChange}>{
+            <label htmlFor="user">Choose a tab: </label>
+            <select value={this.state.person.name} onChange={this.handleChange}>{
               this.state.persons.map(person =>
-              <option>person.name</option>)}
+              <option key={person.personId}>{person.name}</option>)}
             </select>
-          <button
-              className="btn btn-success float-right"
-              onClick={() => this.createDrink()}>
-            Add New Drink
-          </button>
           <a className="btn btn-danger float-right"
              href="../../index.html">
             Home
