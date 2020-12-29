@@ -1,5 +1,5 @@
 const FIND_ALL_DRINKS  = "http://localhost:8080/findAllDrinks"
-const FIND_DRINK_BY_ID = "http://localhost:8080/findDrinkById"
+const FIND_DRINK_BY_ID = "http://localhost:8080/findDrink"
 const CREATE_DRINK_URL = "http://localhost:8080/addDrink"
 const DELETE_DRINK_URL = "http://localhost:8080/removeDrink"
 const UPDATE_DRINK     = "http://localhost:8080/updateDrink"
@@ -21,6 +21,14 @@ const deleteDrink = (drinkId) =>
 
 const updateDrinkName = (drink) =>
     fetch(`${UPDATE_DRINK}/${drink.drinkId}/name/${drink.name}`)
+    .then(response => response.json())
+
+const updateDrinkSize = (drink) =>
+    fetch(`${UPDATE_DRINK}/${drink.drinkId}/size/${drink.size}`)
+    .then(response => response.json())
+
+const updateDrinkPrice = (drink) =>
+    fetch(`${UPDATE_DRINK}/${drink.drinkId}/price/${drink.price}`)
     .then(response => response.json())
 
 

@@ -20,6 +20,8 @@ public class Drink {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="drink_id")
   private int drinkId;
+  @Column(name="size")
+  private int size;
   @Column(name = "name")
   private String name;
   // price is per one drink. Should be calculated beforehand.
@@ -95,5 +97,13 @@ public class Drink {
   public void setBoughtDrinks(
       List<BoughtDrink> boughtDrinks) {
     this.boughtDrinks = boughtDrinks;
+  }
+
+  public int getSize() {
+    return size;
+  }
+
+  public void setSize(int size) {
+    this.size = size;
   }
 }

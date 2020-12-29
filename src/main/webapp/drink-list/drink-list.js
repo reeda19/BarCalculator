@@ -38,7 +38,7 @@ class DrinkList extends React.Component {
               <th>Drink ID</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Amount</th>
+              <th>Size</th>
               <th>&nbsp;</th>
             </tr>
             </thead>
@@ -49,7 +49,7 @@ class DrinkList extends React.Component {
                     <td>{drink.drinkId}</td>
                     <td>{drink.name}</td>
                     <td>{drink.price}</td>
-                    <td>{drink.amount}</td>
+                    <td>{drink.size}</td>
                     <td>
                       <button
                           id="delete" className="btn btn-danger float-right"

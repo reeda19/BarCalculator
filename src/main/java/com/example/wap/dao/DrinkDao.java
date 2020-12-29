@@ -46,11 +46,25 @@ public class DrinkDao {
     return drinkRepository.save(l);
   }
 
-  @GetMapping("/setDrink/{id}/Name/{name}")
+  @GetMapping("/updateDrink/{id}/name/{name}")
   public Drink setDrinkName(@PathVariable(name = "id") int id,
       @PathVariable(name = "name") String name) {
     Drink drink = drinkRepository.findById(id).get();
     drink.setName(name);
+    return drinkRepository.save(drink);
+  }
+  @GetMapping("/updateDrink/{did}/price/{price}")
+  public Drink setDrinkPrice(@PathVariable("did") int did,
+      @PathVariable("price") int price) {
+    Drink drink = drinkRepository.findById(did).get();
+    drink.setPrice(price);
+    return drinkRepository.save(drink);
+  }
+  @GetMapping("/updateDrink/{did}/size/{size}")
+  public Drink setDrinkSize(@PathVariable("did") int did,
+      @PathVariable("size") int size) {
+    Drink drink = drinkRepository.findById(did).get();
+    drink.setSize(size);
     return drinkRepository.save(drink);
   }
 

@@ -12,7 +12,7 @@ const findPersonById = (personId) =>
     fetch(`${FIND_PERSON_BY_ID}/${personId}`)
     .then(response => response.json())
 
-const createPerson = (person) =>
+const createPerson = () =>
     fetch(`${CREATE_PERSON_URL}`)
     .then(response => response.json())
 
