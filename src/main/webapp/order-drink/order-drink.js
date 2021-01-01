@@ -2,7 +2,7 @@ class OrderDrink extends React.Component {
   state = {
     drinks: [],
     persons: [],
-    person: {}
+    personId: {}
   }
 
   findAllDrinks = () =>
@@ -14,15 +14,17 @@ class OrderDrink extends React.Component {
       .then((persons) => this.setState({persons}))
 
   addDrinkToPerson = (did) =>
-      addDrinkToPerson(this.state.person.personId, did)
+      addDrinkToPerson(this.state.personId, did)
 
   componentDidMount = () => {
     this.findAllDrinks();
     this.findAllPersons()
+    this.setState({personId: 0})
   }
 
   handleChange = event => {
-    this.setState({person: event.target.value});
+    this.setState({personId: event.target.value});
+    console.log(this.state.personId)
   }
 
 
@@ -31,9 +33,9 @@ class OrderDrink extends React.Component {
 
         <div className="container-fluid">
             <label htmlFor="user">Choose a tab: </label>
-            <select value={this.state.person.name} onChange={this.handleChange}>{
+            <select onChange={this.handleChange}>{
               this.state.persons.map(person =>
-              <option key={person.personId}>{person.name}</option>)}
+              <option key={person.personId} value={person.personId}>{person.name}</option>)}
             </select>
           <a className="btn btn-danger float-right"
              href="../../index.html">

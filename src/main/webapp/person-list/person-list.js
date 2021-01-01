@@ -15,6 +15,8 @@ class PersonList extends React.Component {
       deletePerson(personId)
       .then(() => this.findAllPersons())
 
+
+
   componentDidMount = () =>
       this.findAllPersons()
 
