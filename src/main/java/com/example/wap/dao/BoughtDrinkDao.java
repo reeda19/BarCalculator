@@ -2,6 +2,8 @@ package com.example.wap.dao;
 
 import com.example.wap.model.BoughtDrink;
 import com.example.wap.model.BoughtDrinkId;
+import com.example.wap.model.Drink;
+import com.example.wap.model.Person;
 import com.example.wap.repository.BoughtDrinkRepository;
 import com.example.wap.repository.DrinkRepository;
 import com.example.wap.repository.PersonRepository;
@@ -26,8 +28,12 @@ public class BoughtDrinkDao {
     BoughtDrink boughtDrink = new BoughtDrink();
     boughtDrink.setDrinkId(did);
     boughtDrink.setPersonId(id);
-    boughtDrink.setDrink(drinkRepository.findById(did).get());
-    boughtDrink.setPerson(personRepository.findById(id).get());
+    Person person = personRepository.findById(id).get();
+    Drink drink = drinkRepository.findById(did).get();
+
+    boughtDrink.setDrink(drink);
+    boughtDrink.setPerson(person);
+    person.addDrink(drink);
     return boughtDrinkRepository.save(boughtDrink);
   }
 

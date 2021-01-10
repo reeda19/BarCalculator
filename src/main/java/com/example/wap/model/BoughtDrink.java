@@ -18,13 +18,34 @@ import javax.persistence.Table;
 @Table(name = "persons_drinks")
 @IdClass(BoughtDrinkId.class)
 public class BoughtDrink {
-  BoughtDrink(int pid, int did){
-    this.pid=pid;
-    this.did=did;
+
+  // Drink ID
+  @Id
+  @Column(name = "did")
+  private int did;
+  // Person ID
+  @Id
+  @Column(name = "pid")
+  private int pid;
+  @Column(name = "amountBought")
+  private int amountBought;
+  @ManyToOne
+  @JsonIgnore
+  @PrimaryKeyJoinColumn(name = "did", referencedColumnName = "drink")
+  private Drink drink;
+  @Id
+  @ManyToOne
+  @JsonIgnore
+  @PrimaryKeyJoinColumn(name = "pid", referencedColumnName = "person")
+  private Person person;
+
+  BoughtDrink(int pid, int did) {
+    this.pid = pid;
+    this.did = did;
   }
 
   public BoughtDrink() {
-
+this.amountBought=1;
   }
 
   @Override
@@ -44,31 +65,6 @@ public class BoughtDrink {
   public int hashCode() {
     return Objects.hash(did, pid);
   }
-
-  // Drink ID
-  @Id
-  @Column(name = "did")
-  private int did;
-
-  // Person ID
-  @Id
-  @Column(name = "pid")
-  private int pid;
-
-  @Column(name = "amountBought")
-  private int amountBought;
-
-
-  @ManyToOne
-  @JsonIgnore
-  @PrimaryKeyJoinColumn(name = "did", referencedColumnName = "drink")
-  private Drink drink;
-
-  @Id
-  @ManyToOne
-  @JsonIgnore
-  @PrimaryKeyJoinColumn(name = "pid", referencedColumnName = "person")
-  private Person person;
 
   public int getDrinkId() {
     return did;
@@ -107,6 +103,7 @@ public class BoughtDrink {
   }
 
   public void increaseAmount() {
-    this.amountBought = amountBought+1;
+    this.amountBought = amountBought + 1;
   }
+
 }

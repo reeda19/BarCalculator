@@ -42,7 +42,7 @@ public class Person {
   public Person(String name) {
     this.name = name;
     this.total = 0;
-    this.boughtDrinks = new ArrayList<>();
+    this.boughtDrinks=new ArrayList<>();
   }
 
   public int getPersonId() {
@@ -65,11 +65,11 @@ public class Person {
     return total;
   }
 
-  //not needed? --> addDrink will most likely be used instead
-/*  public void setBoughtDrinks(
-      List<BoughtDrinks> boughtDrinks) {
-    this.boughtDrinks = boughtDrinks;
-  }*/
+  public void addBoughtDrink(
+      BoughtDrink bd) {
+    this.boughtDrinks.add(bd);
+  }
+
 
   public List<BoughtDrink> getBoughtDrinks() {
     return boughtDrinks;
@@ -83,17 +83,17 @@ public class Person {
     } else {
       this.boughtDrinks.add(type);
     }
-    computeTotal();
+    this.total+=drink.getPrice();
   }
 
-  // Computes the total cost of drinks at the end of the night
+/*  // Computes the total cost of drinks at the end of the night
   public void computeTotal() {
     double total = 0.0;
     for (BoughtDrink s : this.boughtDrinks) {
       total += s.getAmountBought() * s.getDrink().getPrice();
     }
     this.total = total;
-  }
+  }*/
 
 
   @Override
