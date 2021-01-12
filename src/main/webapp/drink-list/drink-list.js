@@ -1,6 +1,6 @@
 class DrinkList extends React.Component {
   state = {
-    drinks: [],
+    drinks: []
   }
 
   findAllDrinks = () =>

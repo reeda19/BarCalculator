@@ -24,6 +24,10 @@ public class Drink {
   private int size;
   @Column(name = "name")
   private String name;
+
+
+  @Column(name = "beer")
+  private boolean beer;
   // price is per one drink. Should be calculated beforehand.
   // For example, a drink of vodka is equal to one shot, not one handle, so it would be about 0.50, not 30
   @Column(name = "price")
@@ -41,7 +45,7 @@ public class Drink {
 
 
   public Drink() {
-
+  this.beer=false;
   }
 
   @Override
@@ -105,5 +109,13 @@ public class Drink {
 
   public void setSize(int size) {
     this.size = size;
+  }
+
+  public boolean getBeer() {
+    return beer;
+  }
+
+  public void setBeer(boolean beer) {
+    this.beer = beer;
   }
 }

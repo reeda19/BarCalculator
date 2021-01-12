@@ -69,5 +69,14 @@ public class DrinkDao {
   }
 
 
+  @GetMapping("/updateDrink/{did}/beer/{beer}")
+  public Drink setDrinkBeer(@PathVariable("did") int did,
+      @PathVariable("beer") boolean beer) {
+    Drink drink = drinkRepository.findById(did).get();
+    drink.setBeer(beer);
+    return drinkRepository.save(drink);
+  }
+
+
 }
 

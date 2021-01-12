@@ -31,5 +31,9 @@ const updateDrinkPrice = (drink) =>
     fetch(`${UPDATE_DRINK}/${drink.drinkId}/price/${drink.price}`)
     .then(response => response.json())
 
+const updateDrinkBeer = (drink) =>
+    fetch(`${UPDATE_DRINK}/${drink.drinkId}/beer/${drink.beer}`)
+    .then(response => response.json())
+
 
 
