@@ -27,11 +27,6 @@ class DrinkEditor extends React.Component {
   saveDrinkName = () =>
       updateDrinkName(this.state.drink)
 
-  handleChange = event => {
-    this.setState({drink: event.target.value}).then(this.saveDrinkBeer());
-
-  }
-
   render() {
     return(
         <div className="container">
@@ -69,10 +64,18 @@ class DrinkEditor extends React.Component {
           </div>
           <div>
             <label>Type of drink: </label>
-            <select value = {this.state.drink.beer} onChange={this.handleChange}>{
+            <select value = {this.state.drink.beer} onChange={(event) => this.setState({
+              drink: {
+                ...this.state.drink,
+                beer: event.target.value
+              }
+            })}>{
               <option value="false">Liquor</option>}
               <option value="true">Beer</option>}
             </select>
+            <button onClick={this.saveDrinkBeer}>
+              Save
+            </button>
           </div>
 
           <div>
