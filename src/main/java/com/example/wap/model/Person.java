@@ -83,7 +83,8 @@ public class Person {
     } else {
       this.boughtDrinks.add(type);
     }
-    this.total+=drink.getPrice();
+    double SHOT_ML = 44.3603;
+    this.total+= drink.getBeer() ? drink.getPrice()/(double) drink.getSize() : drink.getPrice() / ((double) drink.getSize() / SHOT_ML);
   }
 
 /*  // Computes the total cost of drinks at the end of the night
