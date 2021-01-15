@@ -49,7 +49,7 @@ class PersonList extends React.Component {
                   <tr key={person.personId}>
                     <td>{person.personId}</td>
                     <td>{person.name}</td>
-                    <td>{person.total}</td>
+                    <td>{`$${person.total}`}</td>
                     <td>
                       <button
                           id="delete" className="btn btn-danger float-right"

@@ -22,7 +22,7 @@ public class Person {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="person_id")
+  @Column(name = "person_id")
   private int personId;
 
   @Column(name = "name")
@@ -42,7 +42,7 @@ public class Person {
   public Person(String name) {
     this.name = name;
     this.total = 0;
-    this.boughtDrinks=new ArrayList<>();
+    this.boughtDrinks = new ArrayList<>();
   }
 
   public int getPersonId() {
@@ -84,7 +84,10 @@ public class Person {
       this.boughtDrinks.add(type);
     }
     double SHOT_ML = 44.3603;
-    this.total+= drink.getBeer() ? drink.getPrice()/(double) drink.getSize() : drink.getPrice() / ((double) drink.getSize() / SHOT_ML);
+    //calculate cost per drink rounding to 2 decimal places
+    this.total = Double.parseDouble(String
+        .format("%.2f%n", total + (drink.getBeer() ? drink.getPrice() / (double) drink.getSize()
+            : drink.getPrice() / ((double) drink.getSize() / SHOT_ML))));
   }
 
 /*  // Computes the total cost of drinks at the end of the night
