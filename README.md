@@ -16,6 +16,7 @@ A program used to keep track of open tabs at a bar
 - Display price per drink when user is ordering?
 - Add support for removing a drink from a person, removing a person from the tab, and removing a drink from the menu
 - Revamp UI
+- Inline editing
 
 # Long Term
 - Allow users to have 'connect' to bar through code, where they can sign in to their profile and "order" their own drinks from their own device
