@@ -15,8 +15,6 @@ class PersonList extends React.Component {
       deletePerson(personId)
       .then(() => this.findAllPersons())
 
-
-
   componentDidMount = () =>
       this.findAllPersons()
 
@@ -50,6 +48,12 @@ class PersonList extends React.Component {
                     <td>{person.personId}</td>
                     <td>{person.name}</td>
                     <td>{`$${person.total}`}</td>
+                    <td>
+                      <a id="order" className="btn btn-success float-right"
+                         href={`../../order-drink/order-drink.html?personId=${person.personId}`}>
+                        Order
+                      </a>
+                    </td>
                     <td>
                       <button
                           id="delete" className="btn btn-danger float-right"

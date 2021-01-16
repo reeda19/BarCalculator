@@ -27,9 +27,7 @@ class Index extends React.Component {
         <li className="list-group-item">
           <a href="drink-list/drink-list.html">Available Drinks</a>
         </li>
-        <li className="list-group-item">
-          <a href="order-drink/order-drink.html">Order a Drink</a>
-        </li>
+
 
       </ul>
     </div>);
