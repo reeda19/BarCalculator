@@ -18,8 +18,6 @@ class PersonEditor extends React.Component {
   savePersonName = () =>
     updatePersonName(this.state.person)
 
-  savePersonAuthor = () =>
-      updatePersonAuthor(this.state.person)
 
   render() {
     return(
