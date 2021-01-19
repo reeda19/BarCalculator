@@ -6,10 +6,9 @@ A program used to keep track of open tabs at a bar
 - Goal should be an aesthetically pleasing, easy to use web app
 
 # Short Term
-- Drop down menu to choose tab when ordering drink does not automatically have default person selected. Error thrown if drink is ordered with default tab selected
 - Bring user straight to edit screen when new object is created
 - Allow for doubles to be entered for drink price
-- Pop up message/confirmation when drink is successfully ordered
+- Pop up message/confirmation when drink is successfully ordered --> Cannot import library for some reason?
 - Control for input e.g. no letters should be able to be entered into price field
 
 # Medium Term
