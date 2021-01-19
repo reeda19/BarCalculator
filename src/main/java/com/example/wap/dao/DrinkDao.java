@@ -55,7 +55,7 @@ public class DrinkDao {
   }
   @GetMapping("/updateDrink/{did}/price/{price}")
   public Drink setDrinkPrice(@PathVariable("did") int did,
-      @PathVariable("price") int price) {
+      @PathVariable("price") double price) {
     Drink drink = drinkRepository.findById(did).get();
     drink.setPrice(price);
     return drinkRepository.save(drink);
