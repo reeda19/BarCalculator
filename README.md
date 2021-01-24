@@ -7,7 +7,6 @@ A program used to keep track of open tabs at a bar
 
 # Short Term
 - Bring user straight to edit screen when new object is created
-- Allow for doubles to be entered for drink price
 - Pop up message/confirmation when drink is successfully ordered --> Cannot import library for some reason?
 - Control for input e.g. no letters should be able to be entered into price field
 
